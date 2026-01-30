@@ -104,7 +104,7 @@ export default function GoalInput({ initialGoal, onComplete, onBack }: GoalInput
           <h4 className="font-medium text-blue-800 mb-2">Tips for a great goal</h4>
           <ul className="text-sm text-blue-700 space-y-1">
             <li>• Be specific about the action you want customers to take</li>
-            <li>• Mention specific data points if you know them (e.g., "destination city", "loyalty tier")</li>
+            <li>• Mention specific data points if you know them (e.g., &quot;destination city&quot;, &quot;loyalty tier&quot;)</li>
             <li>• Describe the emotional response you want to create</li>
             <li>• Consider both identified and anonymous visitor experiences</li>
           </ul>

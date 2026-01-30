@@ -137,7 +137,7 @@ export default function RecommendationCards({ profiles, goal, onSelect, onBack }
                 {/* Example Output */}
                 <div className="mt-3 p-3 bg-gray-50 rounded-lg">
                   <p className="text-xs text-gray-500 mb-1">Example output:</p>
-                  <p className="text-sm font-medium text-gray-800">"{rec.example_output}"</p>
+                  <p className="text-sm font-medium text-gray-800">&ldquo;{rec.example_output}&rdquo;</p>
                 </div>
 
                 {/* Goal Alignment */}
