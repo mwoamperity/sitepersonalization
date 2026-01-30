@@ -2,7 +2,7 @@
 // Uses Anthropic SDK for AI-powered content generation
 
 import Anthropic from '@anthropic-ai/sdk';
-import type { GenerateCopyRequest, GenerateCopyResponse, AnalyzeDataRequest, AnalysisResult } from '@/types';
+import type { GenerateCopyRequest, GenerateCopyResponse, AnalyzeDataRequest, AnalysisResult, FieldAnalysis } from '@/types';
 import { COPY_GENERATION_PROMPT, DATA_ANALYSIS_PROMPT } from './prompts';
 
 const MODEL = 'claude-sonnet-4-20250514';
@@ -159,25 +159,25 @@ export async function analyzeData(request: AnalyzeDataRequest): Promise<Analysis
     }));
 
     // Build field analysis
-    const fieldAnalysis: Record<string, {
-      null_rate: number;
-      personalization_value: 'high' | 'medium' | 'low';
-      use_cases: string[];
-      sample_values: unknown[];
-      data_type: string;
-    }> = {};
+    const fieldAnalysis: Record<string, FieldAnalysis> = {};
 
     Array.from(allFields.entries()).forEach(([name, data]) => {
       const nullCount = data.values.filter((v) => v === null || v === undefined).length;
       const nullRate = nullCount / data.values.length;
       const nonNullValues = data.values.filter((v) => v !== null && v !== undefined);
 
+      // Determine data type
+      const typeStr = Array.from(data.types)[0] || 'string';
+      const dataType = (['string', 'number', 'boolean', 'date', 'object', 'array'].includes(typeStr)
+        ? typeStr
+        : 'string') as FieldAnalysis['data_type'];
+
       fieldAnalysis[name] = {
         null_rate: nullRate,
         personalization_value: nullRate < 0.2 ? 'high' : nullRate < 0.5 ? 'medium' : 'low',
         use_cases: [],
-        sample_values: nonNullValues.slice(0, 3),
-        data_type: Array.from(data.types)[0] || 'unknown',
+        sample_values: nonNullValues.slice(0, 3) as (string | number | boolean | null)[],
+        data_type: dataType,
       };
     });
 
