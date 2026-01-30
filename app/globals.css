@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 26, 26, 26;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
+
+/* Form inputs */
+input, textarea, select {
+  @apply border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amperity-teal focus:border-transparent transition-all;
+}
+
+input:disabled, textarea:disabled, select:disabled {
+  @apply bg-gray-100 cursor-not-allowed;
+}
+
+/* Buttons */
+.btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-amperity-blue text-white hover:bg-amperity-blue/90 focus:ring-amperity-blue;
+}
+
+.btn-secondary {
+  @apply bg-gray-100 text-gray-700 hover:bg-gray-200 focus:ring-gray-500;
+}
+
+.btn-success {
+  @apply bg-green-600 text-white hover:bg-green-700 focus:ring-green-500;
+}
+
+/* Cards */
+.card {
+  @apply bg-white rounded-xl shadow-sm border border-gray-200 p-6;
+}
+
+/* Step indicator */
+.step-indicator {
+  @apply flex items-center;
+}
+
+.step-dot {
+  @apply w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-all;
+}
+
+.step-dot--active {
+  @apply bg-amperity-blue text-white;
+}
+
+.step-dot--completed {
+  @apply bg-green-500 text-white;
+}
+
+.step-dot--pending {
+  @apply bg-gray-200 text-gray-500;
+}
+
+.step-line {
+  @apply h-0.5 w-12 mx-2;
+}
+
+.step-line--active {
+  @apply bg-amperity-blue;
+}
+
+.step-line--pending {
+  @apply bg-gray-200;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Loading skeleton */
+.skeleton {
+  @apply bg-gradient-to-r from-gray-200 via-gray-300 to-gray-200 bg-[length:200%_100%] animate-pulse;
+}
+
+/* Code snippets */
+.code-block {
+  @apply bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-x-auto;
+}
