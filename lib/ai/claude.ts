@@ -167,7 +167,7 @@ export async function analyzeData(request: AnalyzeDataRequest): Promise<Analysis
       data_type: string;
     }> = {};
 
-    for (const [name, data] of allFields.entries()) {
+    Array.from(allFields.entries()).forEach(([name, data]) => {
       const nullCount = data.values.filter((v) => v === null || v === undefined).length;
       const nullRate = nullCount / data.values.length;
       const nonNullValues = data.values.filter((v) => v !== null && v !== undefined);
@@ -179,7 +179,7 @@ export async function analyzeData(request: AnalyzeDataRequest): Promise<Analysis
         sample_values: nonNullValues.slice(0, 3),
         data_type: Array.from(data.types)[0] || 'unknown',
       };
-    }
+    });
 
     return {
       recommendations,
