@@ -106,7 +106,7 @@ export default async function PreviewPage({ params, searchParams }: PreviewPageP
               placeholder="Enter email to test personalization"
               defaultValue={amp_email || ''}
             />
-            <button onClick="updatePreview()">Update Preview</button>
+            <button id="updateBtn" type="button">Update Preview</button>
           </div>
         </div>
 
@@ -146,6 +146,8 @@ export default async function PreviewPage({ params, searchParams }: PreviewPageP
             }
             window.location.href = url.toString();
           }
+
+          document.getElementById('updateBtn').addEventListener('click', updatePreview);
 
           document.getElementById('testEmail').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
